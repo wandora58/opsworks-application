@@ -12,14 +12,9 @@ node[:deploy].each do |application, deploy|
 
   current_dir = ::File.join(deploy[:deploy_to], 'current')
 
-  file '#{current_dir}/database.env' do
-    content 'DB_HOST: #{deploy[:database][:host]}'
-    mode '0600'
-  end
-
   execute "run application" do
     command <<-EOH
-      python #{current_dir}/main.py
+      python #{current_dir}/main.py #{deploy[:database][:host]}
     EOH
   end
 
