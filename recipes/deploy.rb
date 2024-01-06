@@ -1,4 +1,4 @@
-Chef::Log.info("********** Deploy! **********")
+Chef::Log.info("********** Deploy Start! **********")
 
 node[:deploy].each do |application, deploy|
   opsworks_deploy_dir do
@@ -17,5 +17,3 @@ node[:deploy].each do |application, deploy|
       python main.py
     EOH
   end
-
-Chef::Log.info("********** Deploy End! **********")
