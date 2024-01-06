@@ -1,5 +1,7 @@
 Chef::Log.info("********** Setup! **********")
 
-describe pip('Flask') do
-  it { should be_installed }
+execute "install packages" do
+  command <<-EOH
+    pip install Flask
+  EOH
 end
