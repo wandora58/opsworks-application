@@ -12,7 +12,7 @@ node[:deploy].each do |application, deploy|
 
   execute "set database env" do
     environment(
-      "DB_HOST" => deploy[:database][:host] rescue nil
+      "DB_HOST" => deploy[:database][:host]
     )
   end
 
