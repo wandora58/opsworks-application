@@ -17,3 +17,5 @@ node[:deploy].each do |application, deploy|
       python main.py
     EOH
   end
+
+  Chef::Log.info("********** Deploy End! **********")
