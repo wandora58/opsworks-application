@@ -10,20 +10,17 @@ node[:deploy].each do |application, deploy|
     app application
   end
 
-  current_dir = ::File.join(deploy[:deploy_to], 'current')
-
-  template "#{current_dir}/db.env" do
-    mode 0660
-    variables(
-      :host =>     (deploy[:database][:host] rescue nil),
-      :user =>     (deploy[:database][:username] rescue nil),
-      :password => (deploy[:database][:password] rescue nil)
+  execute "set database env" do
+    environment(
+      "DB_HOST" => deploy[:database][:host] rescue nil
     )
   end
 
+  current_dir = ::File.join(deploy[:deploy_to], 'current')
+
   execute "run application" do
     command <<-EOH
-      nohup python #{current_dir}/main.py &
+      nohup 2>&1 python #{current_dir}/main.py &
     EOH
   end
 
