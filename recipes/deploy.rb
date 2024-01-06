@@ -17,3 +17,4 @@ node[:deploy].each do |application, deploy|
       python main.py
     EOH
   end
+end
