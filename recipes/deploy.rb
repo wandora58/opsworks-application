@@ -12,9 +12,19 @@ node[:deploy].each do |application, deploy|
 
   current_dir = ::File.join(deploy[:deploy_to], 'current')
 
+  template "#{current_dir}/db.env" do
+    mode 0660
+    variables(
+      :host =>     (deploy[:database][:host] rescue nil),
+      :user =>     (deploy[:database][:username] rescue nil),
+      :password => (deploy[:database][:password] rescue nil)
+    )
+  end
+
   execute "run application" do
     command <<-EOH
-      nohup python /srv/www/case_170288248101245/current/main.py &
+      nohup python #{current_dir}/main.py &
     EOH
   end
+
 end
