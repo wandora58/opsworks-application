@@ -14,7 +14,7 @@ node[:deploy].each do |application, deploy|
 
   execute "run application" do
     command <<-EOH
-      python main.py
+      python /srv/www/case_170288248101245/current/main.py
     EOH
   end
 end
