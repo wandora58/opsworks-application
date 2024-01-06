@@ -18,4 +18,4 @@ node[:deploy].each do |application, deploy|
     EOH
   end
 
-  Chef::Log.info("********** Deploy End! **********")
+Chef::Log.info("********** Deploy End! **********")
